@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Star, Calendar, Shield, Clock, CheckCircle, Baby, Heart, Stethoscope, ChevronRight, ChevronLeft } from 'lucide-react'
+import { ArrowRight, Star, CheckCircle, Baby, Heart, Stethoscope } from 'lucide-react'
 import { useReveal } from '../hooks/useReveal'
 import { useHeroEntrance } from '../hooks/useHeroEntrance'
 import { useCountUp } from '../hooks/useCountUp'
@@ -8,29 +8,16 @@ import { useCountUp } from '../hooks/useCountUp'
 // Stock images from Unsplash
 const images = {
   dentalImplant: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=80',
-  dentist1: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80',
-  dentist2: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80',
-  dentist3: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&q=80',
   dentalOffice: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80',
   pediatric: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&q=80',
-  cosmetic: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=80',
+  cosmetic: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=600&q=80',
   general: 'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&q=80',
 }
-
-const dentists = [
-  { name: 'Dr. Shanas', specialty: 'Lead Dentist', image: images.dentist1 },
-  { name: 'Dr. Meera K.', specialty: 'Pediatric Dentist', image: images.dentist2 },
-  { name: 'Dr. Arjun', specialty: 'Orthodontist', image: images.dentist3 },
-]
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
 function Hero() {
   const ready = useHeroEntrance()
-  const [currentDentist, setCurrentDentist] = useState(0)
-
-  const nextDentist = () => setCurrentDentist((prev) => (prev + 1) % dentists.length)
-  const prevDentist = () => setCurrentDentist((prev) => (prev - 1 + dentists.length) % dentists.length)
 
   return (
     <section
@@ -50,8 +37,8 @@ function Hero() {
         pointerEvents: 'none',
       }} />
 
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '100px 32px 60px', position: 'relative', zIndex: 1 }}>
-        <div className={ready ? 'hero-entrance-ready' : ''} style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 48, alignItems: 'center' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '100px 32px 60px', position: 'relative', zIndex: 1 }}>
+        <div className={`hero-grid ${ready ? 'hero-entrance-ready' : ''}`} style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 48, alignItems: 'center' }}>
 
           {/* Left: Text */}
           <div>
@@ -60,11 +47,9 @@ function Hero() {
             </p>
 
             <h1 className="hero-text-enter hero-text-enter-delay-1" style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(42px, 5vw, 72px)', fontWeight: 700, color: '#F5F0EB', lineHeight: 1.05, margin: '0 0 40px', letterSpacing: '-0.03em' }}>
-              Modern<br />
-              Care for<br />
-              <span style={{ fontWeight: 300, fontStyle: 'italic' }}>a</span>{' '}
-              <span style={{ color: '#C4813D', fontWeight: 800 }}>Perfect</span><br />
-              Smile
+              Modern <br />Dental Care<br />
+              To Create Your <br />
+              <span style={{ color: '#C4813D', fontWeight: 800 }}>Perfect</span> Smile
             </h1>
 
             {/* Bottom stats bar */}
@@ -86,7 +71,7 @@ function Hero() {
           </div>
 
           {/* Center: Dental Visual */}
-          <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <div className="hero-visual" style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <div className="hero-image-enter" style={{
               position: 'relative',
               width: '100%',
@@ -96,7 +81,9 @@ function Hero() {
             }}>
               <img
                 src={images.dentalImplant}
-                alt="Modern dental care"
+                alt="Patient receiving modern dental treatment in a bright clinic setting"
+                width={800}
+                height={600}
                 style={{
                   width: '100%',
                   height: '100%',
@@ -157,6 +144,8 @@ function ServicesPreview() {
                     src={s.image}
                     alt={s.title}
                     className="service-card-image"
+                    width={600}
+                    height={400}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
                   <div style={{
@@ -250,7 +239,9 @@ function AboutPreview() {
           <div style={{ borderRadius: 16, overflow: 'hidden', aspectRatio: '4/3' }}>
             <img
               src={images.dentalOffice}
-              alt="Our dental office"
+              alt="Inside the Complete Dental Clinic reception and treatment area"
+              width={800}
+              height={600}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
@@ -288,7 +279,7 @@ function TestimonialsPreview() {
         setActive(prev => (prev + 1) % testimonials.length)
         setIsTransitioning(false)
       }, 350)
-    }, 3000)
+    }, 2500)
     return () => {
       if (timerRef.current) clearInterval(timerRef.current)
     }
@@ -315,7 +306,7 @@ function TestimonialsPreview() {
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 60, alignItems: 'start' }}>
+        <div className="testimonials-grid" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 60, alignItems: 'start' }}>
           <div style={{ background: 'rgba(245,240,235,0.03)', borderRadius: 16, padding: '40px', border: '1px solid rgba(245,240,235,0.06)', minHeight: 280 }}>
             <div className={`testimonial-content ${isTransitioning ? 'testimonial-exit' : ''}`}>
               <p style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(18px, 2.2vw, 24px)', fontWeight: 500, color: '#F5F0EB', lineHeight: 1.55, margin: '0 0 32px', fontStyle: 'italic' }}>
@@ -330,6 +321,8 @@ function TestimonialsPreview() {
                 <img
                   src={t.image}
                   alt={t.name}
+                  width={48}
+                  height={48}
                   style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover' }}
                 />
                 <div>
@@ -364,6 +357,8 @@ function TestimonialsPreview() {
                 <img
                   src={item.image}
                   alt={item.name}
+                  width={40}
+                  height={40}
                   style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
                 />
                 <div style={{ flex: 1 }}>

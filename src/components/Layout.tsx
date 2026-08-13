@@ -13,6 +13,7 @@ const responsiveCSS = `
     .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .stat-cell { border-right: none !important; border-bottom: 1px solid rgba(245,240,235,0.06); }
     .dentist-scroll { overflow-x: auto; padding-bottom: 8px; }
+    .testimonials-grid { grid-template-columns: 1fr !important; }
   }
   @media (max-width: 640px) {
     .services-grid { grid-template-columns: 1fr !important; }
