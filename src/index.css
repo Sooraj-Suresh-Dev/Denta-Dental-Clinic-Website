@@ -1,0 +1,522 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-dark-bg: #0a0a0a;
+  --color-warm-brown: #2C1810;
+  --color-warm-orange: #C4813D;
+  --color-warm-rust: #8B3A1F;
+  --color-warm-rust-light: #A65D2E;
+  --color-cream: #F5F0EB;
+  --color-cream-dark: #E8DDD5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #F5F0EB;
+  background: #0a0a0a;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #C4813D; border-radius: 2px; }
+
+/* Hover utilities */
+.btn-primary {
+  background: #C4813D;
+  color: #fff;
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-primary:hover {
+  background: #A86B2F;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196,129,61,0.35);
+}
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(196,129,61,0.2);
+}
+
+.btn-secondary {
+  border: 1.5px solid rgba(245,240,235,0.3);
+  color: rgba(245,240,235,0.8);
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-secondary:hover {
+  border-color: #C4813D;
+  color: #C4813D;
+}
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.btn-dark {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-dark:hover {
+  background: #252525;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.btn-outline {
+  border: 1.5px solid rgba(245,240,235,0.3);
+  color: #F5F0EB;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-outline:hover {
+  border-color: #C4813D;
+  color: #C4813D;
+  transform: translateY(-1px);
+}
+
+.nav-link {
+  color: rgba(245,240,235,0.6);
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.2s ease;
+}
+.nav-link:hover {
+  color: #C4813D;
+}
+
+.footer-link {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(245,240,235,0.4);
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: color 0.2s ease;
+}
+.footer-link:hover {
+  color: #C4813D;
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(245,240,235,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(245,240,235,0.4);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.social-icon:hover {
+  background: #C4813D;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(196,129,61,0.3);
+}
+
+.card-hover {
+  transition: transform 0.3s ease;
+}
+.card-hover:hover {
+  transform: scale(1.03);
+}
+
+.service-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+}
+.service-card:hover .service-card-image {
+  transform: scale(1.06);
+}
+.service-card-image {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.service-card:hover .service-card-arrow {
+  transform: translateX(4px);
+  color: #C4813D;
+}
+.service-card-arrow {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Step connector line between steps on desktop */
+.step-connector {
+  display: none;
+}
+@media (min-width: 1025px) {
+  .step-connector {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: -12px;
+    width: 24px;
+    height: 1px;
+    background: rgba(196,129,61,0.2);
+  }
+}
+
+.input-field {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(245,240,235,0.06);
+  border: 1px solid rgba(245,240,235,0.12);
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #F5F0EB;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.input-field:focus {
+  border-color: #C4813D;
+  background: rgba(245,240,235,0.08);
+  box-shadow: 0 0 0 3px rgba(196,129,61,0.1);
+}
+.input-field::placeholder {
+  color: rgba(245,240,235,0.3);
+}
+select.input-field {
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23C4813D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+.dentist-card {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dentist-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(196,129,61,0.2);
+}
+
+/* ─── Motion ─────────────────────────────────────────────────────────────── */
+
+/* Hero entrance — transition-based so it replays on every navigation */
+.hero-text-enter {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-text-enter-delay-1 { transition-delay: 0.15s; }
+.hero-text-enter-delay-2 { transition-delay: 0.3s; }
+.hero-text-enter-delay-3 { transition-delay: 0.45s; }
+
+.hero-image-enter {
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.2s;
+}
+
+.hero-entrance-ready .hero-text-enter,
+.hero-entrance-ready .hero-image-enter {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Scroll reveal — sections fade in as they enter viewport */
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reveal from left — for text content that should slide in from the side */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Reveal from right — for images that should slide in from the opposite side */
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Clip reveal — image wipe-in using clip-path for a more cinematic feel */
+.reveal-clip {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-clip.visible {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Scale reveal — for elements that should pop into view */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Staggered children — for grids that appear as a group */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.08s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.16s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.32s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+
+/* Step chain — sequential left-to-right reveal for connected steps */
+.reveal-step-chain > * {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-step-chain.visible > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: translateX(0); }
+.reveal-step-chain.visible > *:nth-child(2) { transition-delay: 0.12s; opacity: 1; transform: translateX(0); }
+.reveal-step-chain.visible > *:nth-child(3) { transition-delay: 0.24s; opacity: 1; transform: translateX(0); }
+.reveal-step-chain.visible > *:nth-child(4) { transition-delay: 0.36s; opacity: 1; transform: translateX(0); }
+
+/* Testimonial crossfade */
+.testimonial-content {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.testimonial-exit {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* Dentist cards horizontal scroll */
+.dentist-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.dentist-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Testimonial cards horizontal scroll */
+.testimonial-scroll {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding-bottom: 8px;
+}
+.testimonial-scroll::-webkit-scrollbar {
+  display: none;
+}
+.testimonial-scroll-card {
+  flex: 0 0 380px;
+  background: rgba(245,240,235,0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(245,240,235,0.06);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease;
+}
+.testimonial-scroll-card:hover {
+  border-color: rgba(196,129,61,0.2);
+}
+@media (max-width: 640px) {
+  .testimonial-scroll-card {
+    flex: 0 0 85vw;
+  }
+}
+
+/* Service card image zoom on hover */
+.service-card-image {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.service-card:hover .service-card-image {
+  transform: scale(1.06);
+}
+
+/* CTA gradient animation — subtle color shift to earn attention */
+@keyframes ctaGradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.cta-gradient-animated {
+  background-size: 200% 200%;
+  animation: ctaGradientShift 6s ease infinite;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .hero-text-enter,
+  .hero-image-enter {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .reveal-clip {
+    clip-path: none;
+    transition: none;
+  }
+
+  .reveal-stagger > *,
+  .reveal-step-chain > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .testimonial-content {
+    transition: none;
+  }
+
+  .dentist-card {
+    transition: none;
+  }
+
+  .service-card-arrow {
+    transition: none;
+  }
+
+  .service-card-image {
+    transition: none;
+  }
+
+  .cta-gradient-animated {
+    animation: none;
+  }
+}
+
+/* Spin animation for loading states */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Success check animation */
+@keyframes scaleIn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.success-icon {
+  animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
