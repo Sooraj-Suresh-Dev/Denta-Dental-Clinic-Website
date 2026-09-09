@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-export function useCountUp(end: number, duration = 1500, decimals = 0) {
+export function useCountUp(end: number, duration = 1500, decimals = 0, threshold = 0.5) {
   const [count, setCount] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
   const hasAnimated = useRef(false)
@@ -8,6 +8,9 @@ export function useCountUp(end: number, duration = 1500, decimals = 0) {
   useEffect(() => {
     const el = ref.current
     if (!el) return
+
+    // Prevent jitter: all digits render at equal width
+    el.style.fontVariantNumeric = 'tabular-nums'
 
     const animateValue = () => {
       if (hasAnimated.current) return
@@ -36,20 +39,25 @@ export function useCountUp(end: number, duration = 1500, decimals = 0) {
           animateValue()
         }
       },
-      { threshold: 0.1 }
+      { threshold }
     )
 
     observer.observe(el)
 
-    // Fallback: if element is already visible on mount, animate immediately
+    // If element is already visible on mount, animate after a short delay
+    // so the user sees the count start from 0
     const rect = el.getBoundingClientRect()
     if (rect.top < window.innerHeight && rect.bottom > 0) {
       observer.disconnect()
-      animateValue()
+      setTimeout(() => animateValue(), 200)
     }
 
     return () => observer.disconnect()
-  }, [end, duration, decimals])
+  }, [end, duration, decimals, threshold])
 
-  return { ref, count }
+  const formatted = decimals > 0
+    ? count.toFixed(decimals)
+    : count.toLocaleString()
+
+  return { ref, count, formatted }
 }

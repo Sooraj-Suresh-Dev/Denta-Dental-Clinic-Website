@@ -202,8 +202,8 @@ function ServicesPreview() {
 function AboutPreview() {
   const { ref: textRef, visible: textVisible } = useReveal(0.15)
   const { ref: imageRef, visible: imageVisible } = useReveal(0.15)
-  const { ref: patientsRef, count: patientsCount } = useCountUp(2000, 1200)
-  const { ref: ratingRef, count: ratingCount } = useCountUp(4.9, 1000, 1)
+  const { ref: patientsRef, formatted: patientsFormatted } = useCountUp(2000, 1200)
+  const { ref: ratingRef, formatted: ratingFormatted } = useCountUp(4.9, 1000, 1)
 
   return (
     <section style={{ padding: '100px 24px', background: '#1a0f0a', position: 'relative', overflow: 'hidden' }}>
@@ -221,12 +221,12 @@ function AboutPreview() {
             From cosmetic dentistry to pediatric care — we handle it all under one roof with honesty and compassion.
           </p>
           <div style={{ display: 'flex', gap: 40, alignItems: 'center' }}>
-            <div ref={patientsRef}>
-              <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 32, fontWeight: 800, color: '#C4813D', lineHeight: 1 }}>{patientsCount.toLocaleString()}+</div>
+            <div ref={patientsRef} style={{ minWidth: 120 }}>
+              <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 32, fontWeight: 800, color: '#C4813D', lineHeight: 1 }}>{patientsFormatted}+</div>
               <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, color: 'rgba(245,240,235,0.5)', marginTop: 4 }}>Patients Treated</div>
             </div>
-            <div ref={ratingRef}>
-              <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 32, fontWeight: 800, color: '#C4813D', lineHeight: 1 }}>{ratingCount}</div>
+            <div ref={ratingRef} style={{ minWidth: 60 }}>
+              <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 32, fontWeight: 800, color: '#C4813D', lineHeight: 1 }}>{ratingFormatted}</div>
               <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, color: 'rgba(245,240,235,0.5)', marginTop: 4 }}>Google Rating</div>
             </div>
             <Link to="/about" style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, color: '#C4813D', textDecoration: 'none', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 6 }}>

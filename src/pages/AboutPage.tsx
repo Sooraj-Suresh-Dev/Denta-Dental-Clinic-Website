@@ -48,8 +48,8 @@ export default function AboutPage() {
   const { ref: storyRef, visible: storyVisible } = useReveal(0.1)
   const { ref: valuesRef, visible: valuesVisible } = useReveal(0.1)
   const { ref: ctaRef, visible: ctaVisible } = useReveal(0.15)
-  const { ref: patientsRef, count: patientsCount } = useCountUp(2000, 1200)
-  const { ref: ratingRef, count: ratingCount } = useCountUp(4.9, 1000, 1)
+  const { ref: patientsRef, formatted: patientsFormatted } = useCountUp(2000, 1200)
+  const { ref: ratingRef, formatted: ratingFormatted } = useCountUp(4.9, 1000, 1)
 
   return (
     <>
@@ -87,12 +87,12 @@ export default function AboutPage() {
               </p>
 
               <div style={{ display: 'flex', gap: 48, paddingTop: 24, borderTop: '1px solid rgba(245,240,235,0.06)' }}>
-                <div ref={patientsRef}>
-                  <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 36, fontWeight: 800, color: '#C4813D', lineHeight: 1 }}>{patientsCount.toLocaleString()}+</div>
+                <div ref={patientsRef} style={{ minWidth: 140 }}>
+                  <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 36, fontWeight: 800, color: '#C4813D', lineHeight: 1 }}>{patientsFormatted}+</div>
                   <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, color: 'rgba(245,240,235,0.4)', marginTop: 6 }}>Patients Treated</div>
                 </div>
-                <div ref={ratingRef}>
-                  <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 36, fontWeight: 800, color: '#C4813D', lineHeight: 1 }}>{ratingCount}</div>
+                <div ref={ratingRef} style={{ minWidth: 60 }}>
+                  <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 36, fontWeight: 800, color: '#C4813D', lineHeight: 1 }}>{ratingFormatted}</div>
                   <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, color: 'rgba(245,240,235,0.4)', marginTop: 6 }}>Google Rating</div>
                 </div>
               </div>
