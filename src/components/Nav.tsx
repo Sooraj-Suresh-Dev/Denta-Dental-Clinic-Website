@@ -14,6 +14,7 @@ const links = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [menuVisible, setMenuVisible] = useState(false)
   const location = useLocation()
 
   useEffect(() => {
@@ -25,6 +26,15 @@ export default function Nav() {
   useEffect(() => {
     setMenuOpen(false)
   }, [location])
+
+  useEffect(() => {
+    if (menuOpen) {
+      const timer = setTimeout(() => setMenuVisible(true), 30)
+      return () => clearTimeout(timer)
+    } else {
+      setMenuVisible(false)
+    }
+  }, [menuOpen])
 
   return (
     <header
@@ -140,7 +150,7 @@ export default function Nav() {
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: '#fff' }}
-              className="show-mobile"
+              className={`hamburger-btn show-mobile ${menuOpen ? 'open' : ''}`}
               aria-label="Toggle menu"
             >
               {menuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -153,39 +163,88 @@ export default function Nav() {
           <>
             <div
               onClick={() => setMenuOpen(false)}
+              className="mobile-overlay-enter"
               style={{ position: 'fixed', inset: 0, top: 72, background: 'rgba(0,0,0,0.6)', zIndex: 98 }}
             />
-            <div style={{ paddingBottom: 20, borderTop: '1px solid rgba(245,240,235,0.08)', position: 'relative', zIndex: 99, background: '#0a0a0a' }}>
-              {links.map(l => {
-                const isActive = location.pathname === l.path
-                return (
-                  <Link
-                    key={l.label}
-                    to={l.path}
-                    onClick={() => setMenuOpen(false)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 12,
-                      padding: '14px 0',
-                      color: isActive ? '#C4813D' : 'rgba(245,240,235,0.8)',
-                      textDecoration: 'none',
-                      fontFamily: 'Poppins, sans-serif',
-                      fontSize: 15,
-                      fontWeight: 500,
-                      borderBottom: '1px solid rgba(245,240,235,0.06)',
-                    }}
-                  >
-                    <span style={{
-                      width: 6,
-                      height: 6,
-                      borderRadius: '50%',
-                      background: isActive ? '#C4813D' : 'rgba(245,240,235,0.3)',
-                    }} />
-                    {l.label}
-                  </Link>
-                )
-              })}
+            <div
+              className="mobile-menu-enter"
+              style={{
+                margin: '12px 16px 16px',
+                borderRadius: 16,
+                border: '1px solid rgba(245,240,235,0.06)',
+                background: 'rgba(245,240,235,0.03)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+                boxShadow: '0 12px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(245,240,235,0.03)',
+                position: 'relative',
+                zIndex: 99,
+                overflow: 'hidden',
+              }}
+            >
+
+              {/* Section label */}
+              <div style={{ padding: '20px 24px 0' }}>
+                <span style={{
+                  fontFamily: 'Poppins, sans-serif',
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: '#C4813D',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                }}>
+                  Menu
+                </span>
+              </div>
+
+              {/* Staggered links */}
+              <div
+                className={`mobile-menu-stagger ${menuVisible ? 'visible' : ''}`}
+                style={{ padding: '12px 16px 0' }}
+              >
+                {links.map(l => {
+                  const isActive = location.pathname === l.path
+                  return (
+                    <Link
+                      key={l.label}
+                      to={l.path}
+                      onClick={() => setMenuOpen(false)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 12,
+                        padding: '13px 12px',
+                        marginBottom: 2,
+                        color: isActive ? '#C4813D' : 'rgba(245,240,235,0.7)',
+                        textDecoration: 'none',
+                        fontFamily: 'Poppins, sans-serif',
+                        fontSize: 15,
+                        fontWeight: 500,
+                        borderRadius: 10,
+                        transition: 'all 0.2s ease',
+                        background: isActive ? 'rgba(196,129,61,0.08)' : 'transparent',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.background = 'rgba(196,129,61,0.08)'
+                        e.currentTarget.style.color = '#C4813D'
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.background = isActive ? 'rgba(196,129,61,0.08)' : 'transparent'
+                        e.currentTarget.style.color = isActive ? '#C4813D' : 'rgba(245,240,235,0.7)'
+                      }}
+                    >
+                      <span style={{
+                        width: 5,
+                        height: 5,
+                        borderRadius: '50%',
+                        background: isActive ? '#C4813D' : 'rgba(245,240,235,0.2)',
+                        transition: 'background 0.2s ease',
+                        flexShrink: 0,
+                      }} />
+                      {l.label}
+                    </Link>
+                  )
+                })}
+              </div>
             </div>
           </>
         )}

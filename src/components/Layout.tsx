@@ -52,6 +52,55 @@ const responsiveCSS = `
   ::placeholder {
     color: rgba(245,240,235,0.3);
   }
+
+  /* ─── Mobile Menu Animations ─────────────────────────────────────────── */
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .mobile-menu-enter {
+    animation: slideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .mobile-overlay-enter {
+    animation: fadeIn 0.2s ease forwards;
+  }
+
+  /* Hamburger to X morph */
+  .hamburger-btn {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hamburger-btn.open {
+    transform: rotate(90deg);
+  }
+
+  /* Mobile menu stagger — items cascade in from left */
+  .mobile-menu-stagger > * {
+    opacity: 0;
+    transform: translateX(-16px);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .mobile-menu-stagger.visible > *:nth-child(1) { transition-delay: 0.04s; opacity: 1; transform: translateX(0); }
+  .mobile-menu-stagger.visible > *:nth-child(2) { transition-delay: 0.10s; opacity: 1; transform: translateX(0); }
+  .mobile-menu-stagger.visible > *:nth-child(3) { transition-delay: 0.16s; opacity: 1; transform: translateX(0); }
+  .mobile-menu-stagger.visible > *:nth-child(4) { transition-delay: 0.22s; opacity: 1; transform: translateX(0); }
+  .mobile-menu-stagger.visible > *:nth-child(5) { transition-delay: 0.28s; opacity: 1; transform: translateX(0); }
+  .mobile-menu-stagger.visible > *:nth-child(6) { transition-delay: 0.34s; opacity: 1; transform: translateX(0); }
+  .mobile-menu-stagger.visible > *:nth-child(7) { transition-delay: 0.40s; opacity: 1; transform: translateX(0); }
 `
 
 export default function Layout() {
